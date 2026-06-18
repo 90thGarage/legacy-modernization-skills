@@ -29,12 +29,14 @@ Use this checklist before finishing a generated view.
 - Local components are composition-only.
 - No new visual primitives were invented.
 
-## Client Design System
+## Design System
 
-- Colors match `client-design-system.md`.
+- Colors match `design.md`.
 - Radius matches the client token.
 - Spacing and density match the client rules.
 - Typography follows the client rules.
+- Required fonts are actually loaded or missing font setup is documented.
+- Buttons, panels, cards, inputs, badges, tabs, dialogs, and operational sections use 4px radius unless an existing repo component forces otherwise.
 - Buttons, tables, forms, badges, tabs, and panels follow documented component rules.
 - Incomplete design system inputs are recorded as assumptions.
 
@@ -55,6 +57,22 @@ Use this checklist before finishing a generated view.
 - Actions are visually prioritized.
 - The screen looks like the client's product, not default shadcn.
 
+## Critical Path / Viewport QA
+
+Use for high-frequency operational workflows such as billing, POS, fast entry, approvals, or irreversible submit flows.
+
+- The baseline desktop viewport from the handoff was checked.
+- The primary input or command area is visible without scrolling.
+- For item-entry screens, the search/code/name input is directly above the items table/list it fills.
+- The active working record/list is visible without scrolling.
+- The total/status/blocking validation area is visible without scrolling.
+- The primary completion action is visible without scrolling.
+- Secondary actions do not push the critical path below the fold.
+- The main table/list is the scrollable region when vertical space is constrained.
+- Card padding, decorative panels, and vertical chrome were reduced when they hurt operational fit.
+- Useful legacy layout strengths were preserved even when the visual style changed.
+- If any critical-path item is below the fold, revise the layout before finishing.
+
 ## Verification
 
 Record commands run and results in `implementation-notes.md`.
@@ -65,4 +83,5 @@ typecheck:
 test:
 build:
 browser/screenshot:
+critical viewport:
 ```

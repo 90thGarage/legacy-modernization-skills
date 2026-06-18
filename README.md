@@ -5,7 +5,7 @@ Two autonomous Codex skills for migrating legacy PowerBuilder-style screens into
 ## Skills
 
 - `legacy-ux-brief`: interviews the user, analyzes the legacy screen, and creates UX handoff artifacts.
-- `legacy-ui-build`: consumes the UI handoff and builds a React view using shadcn/ui adapted to the client design system.
+- `legacy-ui-build`: consumes the UI handoff and builds a React view using shadcn/ui adapted to the design system.
 
 ## Installation
 
@@ -39,7 +39,7 @@ The UI skill reads `ui-handoff.md` first and writes code to the user-specified d
 Before using `legacy-ui-build`, the client should complete:
 
 ```txt
-legacy-ui-build/references/client-design-system.md
+legacy-ui-build/references/design.md
 legacy-ui-build/references/component-library.md
 legacy-ui-build/references/product-domain.md
 ```

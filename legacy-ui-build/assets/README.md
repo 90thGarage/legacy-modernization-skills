@@ -1,6 +1,6 @@
 # Assets
 
-Place client assets here so the UI build skill can reference them from `references/client-design-system.md`.
+Place client assets here so the UI build skill can reference them from `references/design.md`.
 
 Suggested structure:
 
@@ -12,4 +12,17 @@ assets/
   screenshots/
 ```
 
-Do not rely on assets being discovered automatically. Reference important files explicitly in `client-design-system.md`.
+Do not rely on assets being discovered automatically. Reference important files explicitly in `design.md`.
+
+## Available Assets
+
+### Logos
+
+InfoManager logo exports live in `assets/logos/`:
+
+- `infomanager-blue.svg`
+- `infomanager-negative.svg`
+- `infomanager-positive.svg`
+- `infomanager-blue-subtitle.svg`
+- `infomanager-negative-subtitle.svg`
+- `infomanager-positive-subtitle.svg`

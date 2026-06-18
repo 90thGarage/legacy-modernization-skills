@@ -30,6 +30,17 @@ Include only if the view belongs to a larger workflow.
 - Frequency:
 - Decision pressure:
 
+## Product And Adoption Context
+
+Use for business management systems, high-frequency operational screens, or migrations with existing users.
+
+- Existing user base:
+- Adoption expectation:
+- Training constraints:
+- Known business language to preserve:
+- Legacy concepts that can be renamed:
+- Product maintainability concerns:
+
 ## Legacy Screen Assessment
 
 - What the legacy screen does:
@@ -40,13 +51,71 @@ Include only if the view belongs to a larger workflow.
 - Technical/system-only content:
 - Source limitations:
 
-## Screenshot Extraction
+## Workflow Modernization Assessment
 
-Include when a legacy screenshot is available.
+Map the current workflow before proposing changes. The current flow is evidence, not a constraint.
+
+### Current Workflow
+
+| Step | User goal | Legacy behavior | Step classification | Keep / simplify / automate / remove candidate | Notes |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  | essential decision / useful confirmation / expert shortcut / automatable default / legacy workaround / redundant / compliance-fiscal / permission-gated |  |  |
+
+### Simplification Opportunities
+
+- Repeated work to reduce:
+- Data that can be safely defaulted:
+- Technical decisions that can become user-facing choices:
+- Validation that should move earlier:
+- Legacy workarounds to remove:
+- User control that must remain:
+
+## Critical Workflow Notes
+
+Use when the view affects billing, invoicing, payments, stock, fiscal authorization, customer account state, irreversible submission, or other high-risk business operations.
+
+- Critical workflow:
+- Document/entity lifecycle:
+- Irreversible or high-risk actions:
+- Fiscal/tax/authorization impact:
+- Stock/account/payment impact:
+- Safe draft or recovery behavior:
+- Preconditions before submission:
+
+## Critical Viewport Contract
+
+Use for high-frequency operational workflows where the user must complete the job quickly and safely.
+
+- Baseline viewport:
+- Primary input that must be visible without scroll:
+- Relationship between primary input and working list/table:
+- Working record/list that must be visible without scroll:
+- Total/status that must be visible without scroll:
+- Primary action that must be visible without scroll:
+- Blocking validation that must be visible without scroll:
+- Content allowed below the fold:
+- Legacy layout strengths to preserve:
+- Density target:
+
+## Roles And Permissions
+
+| Role | Primary goal | Visible information | Allowed actions | Restricted actions | Notes |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+
+## Screenshot / Capture Extraction
+
+Include when one or more legacy screenshots, dialogs, secondary windows, expanded rows, tabs, or alternate states are available.
+
+### Capture Inventory
+
+| Capture | Surface type | Parent surface | Trigger / entry point | Purpose | Confirmation |
+| --- | --- | --- | --- | --- | --- |
+|  | main screen / modal / dialog / tab / expanded row / error / state |  |  |  | confirmed / screenshot-inferred / needs user confirmation |
 
 ### Visible Structure
 
-- Regions/panels/tabs:
+- Regions/panels/tabs/dialogs:
 - Tables/lists:
 - Toolbars/action areas:
 - Status/error/warning areas:
@@ -59,6 +128,17 @@ List visible fields, controls, actions, statuses, codes, totals, timestamps, and
 ### Screenshot-Inferred Assumptions
 
 List anything inferred from layout or visual cues that has not been confirmed by the user.
+
+### Secondary Surface Decisions
+
+For each modal, dialog, tab, expanded row, lookup, confirmation, or alternate state:
+
+- Legacy surface:
+- Modern pattern: keep as modal / convert to drawer / convert to inline panel / merge into main view / remove candidate
+- Data passed from parent:
+- Data returned to parent:
+- Required validation:
+- Rationale:
 
 ## Information Architecture
 
@@ -90,7 +170,24 @@ Every visible or described legacy field, control, action, and status must appear
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 |  |  | screenshot / user / code / file | Keep visible / Move to secondary / Hide by default / Remove candidate / Needs confirmation |  | Primary / Secondary / Low | required / optional / derived / display-only / unknown | confirmed / screenshot-inferred / assumption / needs user confirmation |  |
 
+## Action And Capability Model
+
+Classify actions by frequency, risk, and permission. Do not put every legacy action at the same visual level.
+
+| Action / capability | Frequency | Risk | Permission | Modern placement | Confirmation | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+|  | always visible / frequent secondary / occasional / expert / legacy candidate | safe / risky / irreversible / destructive | all users / role-gated / supervisor / admin / unknown |  | confirmed / assumption / needs user confirmation |  |
+
 ## Proposed View Structure
+
+### Layout And Viewport Strategy
+
+- First viewport:
+- Fixed/sticky areas:
+- Scrollable areas:
+- Right/left action rail:
+- Bottom summary/action bar:
+- Rationale:
 
 ### Header
 
@@ -120,6 +217,16 @@ Every visible or described legacy field, control, action, and status must appear
 - Related views:
 - Rationale:
 
+### Dialogs, Drawers, And Secondary Surfaces
+
+- Surface:
+- Trigger:
+- Purpose:
+- Content:
+- Actions:
+- Validation:
+- Rationale:
+
 ## Interaction And States
 
 - Loading:
@@ -134,6 +241,17 @@ Every visible or described legacy field, control, action, and status must appear
 ## Business Rules
 
 List rules that must be visible or enforced in the UI.
+
+## Defaults, Automation, And Validation
+
+- Safe defaults:
+- Suggested editable defaults:
+- Defaults requiring confirmation:
+- Decisions that must remain manual:
+- Inline validation:
+- Action gating:
+- Post-submit validation:
+- Recovery from failed submit:
 
 ## Data And State Notes
 
@@ -157,6 +275,13 @@ Separate confirmed facts from assumptions.
 
 Summarize what the implementation agent must preserve.
 
+## Reusable Product Components
+
+- Components or patterns to reuse:
+- Screens/workflows likely to reuse them:
+- State or permission behavior to centralize:
+- Avoid one-off implementation:
+
 ## Acceptance Criteria
 
 - The view supports the primary task without exposing unnecessary legacy complexity.
@@ -165,3 +290,8 @@ Summarize what the implementation agent must preserve.
 - `Remove Candidate` items are not excluded unless confirmed.
 - Every identified legacy item appears in the field decision matrix.
 - Required states are represented in the proposed structure.
+- Current workflow steps are classified before they are changed.
+- Frequent, expert, risky, and permission-gated actions are visually distinguished.
+- Safe defaults and validation behavior are documented.
+- The critical path can be completed without scrolling on the baseline desktop viewport.
+- Secondary content does not push primary input, total/status, or primary action below the fold.

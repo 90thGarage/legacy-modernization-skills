@@ -3,7 +3,9 @@ name: legacy-ux-brief
 description: Create UX architecture briefs and UI handoffs for modernizing legacy PowerBuilder-style screens into focused web app views.
 ---
 
-Use this skill when the user wants to modernize a legacy product screen, especially from PowerBuilder or another dense enterprise UI, into a clearer web app view.
+Use this skill when the user wants to modernize a legacy product screen, especially from PowerBuilder or another dense enterprise/business management UI, into a clearer web app view.
+
+Act as a senior product and UX partner for legacy modernization, not as a passive transcription tool. Preserve operational truth while challenging legacy structure. Identify what must remain recognizable, what can be simplified, what should be automated, what needs confirmation, and what should become a clearer modern workflow.
 
 The goal is to produce two artifacts:
 
@@ -22,15 +24,27 @@ Before interviewing or writing artifacts, read:
 
 Accept any of these input levels:
 
-1. Ideal: legacy screenshot plus user explanation.
+1. Ideal: one or more legacy screenshots plus user explanation.
 2. Acceptable: detailed text description of the legacy screen.
 3. Minimum: view name, goal, fields, actions, and known constraints.
 
 Do not block if there is no screenshot. Mark this as a source limitation in the brief.
 
+If the workflow includes modals, popups, lookup windows, confirmation dialogs, validation dialogs, secondary tabs, expanded row details, or alternate states, ask for screenshots or descriptions of those surfaces unless the user already provided them.
+
 ## Screenshot Analysis
 
-When a legacy screenshot is available, analyze it before interviewing further.
+When legacy screenshots are available, analyze all of them before interviewing further. Treat each screenshot as a captured surface in the same workflow, not as a separate migration unless the user says it is a separate view.
+
+For each screenshot, assign a short capture label, such as:
+
+- main screen
+- edit dialog
+- approval confirmation
+- lookup modal
+- error state
+- expanded row
+- secondary tab
 
 Extract:
 
@@ -42,7 +56,15 @@ Extract:
 - technical/system-only values that need translation or confirmation
 - apparent validation, required fields, disabled states, permissions, or warnings
 
-Mark anything inferred from the screenshot as `screenshot-inferred` unless the user confirms it.
+For multi-capture inputs, also extract:
+
+- which capture is the parent surface
+- how each secondary surface opens
+- what data flows from a modal or dialog back to the parent view
+- which fields, actions, warnings, or rules appear only in secondary surfaces
+- whether the modern UX should keep the surface separate, convert it to a drawer/panel, or merge it into the main workflow
+
+Mark anything inferred from screenshots as `screenshot-inferred` unless the user confirms it.
 
 ## Interview Rules
 
@@ -94,7 +116,13 @@ Maintain these interview notes internally during the conversation:
 - confirmed facts
 - open assumptions
 - UX decisions already resolved
+- current workflow steps classified as essential, useful confirmation, expert shortcut, automatable default, legacy workaround, redundant, compliance/fiscal, or permission-gated
+- action/capability classification by frequency, risk, and role
+- simplification and safe automation opportunities
+- critical viewport requirements for high-frequency workflows
+- legacy layout strengths that should be preserved even if the visual design changes
 - fields, actions, states, or rules that still need classification
+- screenshot captures and secondary surfaces already analyzed
 - remove candidates requiring confirmation
 - hidden-by-default information requiring confirmation
 - output path and overwrite status
@@ -114,11 +142,18 @@ Questions must sound like they come from a senior UX/product designer modernizin
 Prefer questions that force a product decision, such as:
 
 - which user decision the screen must optimize for
+- which current workflow steps are essential versus legacy workarounds
+- which repeated decisions can become safe defaults or suggestions
 - what the user must see before taking the primary action
 - which legacy data is operationally required versus merely historical
+- which modals, dialogs, tabs, expanded rows, or alternate states are part of the workflow
 - which fields are compliance, audit, support, or debugging requirements
-- which actions are primary, dangerous, permission-gated, or rare
+- which actions are frequent, expert-only, dangerous, permission-gated, or rare
 - which business rules should be visible, enforced, or only validated after submission
+- which primary input, total/status, blocking validation, and completion action must remain visible without scroll
+- which layout strengths from the legacy screen support operational speed and should be preserved
+- which roles use the screen and how permissions change behavior
+- which parts of the UX should become reusable product components
 - which workflow step comes before and after this view
 - which states block work versus allow partial progress
 - which information should be promoted, grouped, progressively disclosed, or removed as a candidate
@@ -138,11 +173,22 @@ Good example:
 
 ```md
 Pregunta 3:
-Quiero definir el criterio de confianza antes de permitir la accion principal, porque eso decide si la pantalla necesita un resumen de riesgo arriba o si alcanza con detalles secundarios.
+Quiero mapear el flujo actual para separar continuidad util de friccion heredada, porque no queremos copiar pasos innecesarios pero tampoco romper atajos o conceptos que los usuarios ya dominan.
 
-Recomendacion: Mantener visibles solo identidad, estado, deuda/riesgo y la accion principal; mover historial y metadatos tecnicos a disclosure secundario.
+Recomendacion: Usar el flujo actual como evidencia, no como restriccion. Mantener conceptos criticos reconocibles, pero simplificar pasos repetidos, decisiones tecnicas, defaults inferibles y validaciones que hoy aparecen tarde.
 
-Antes de aprobar o continuar, que dato necesita ver si o si el usuario para sentirse seguro?
+En el flujo actual, que pasos son decisiones reales del usuario y que pasos existen porque el sistema viejo lo obliga?
+```
+
+For high-frequency operational views, ask a critical viewport question before drafting:
+
+```md
+Pregunta N:
+Quiero definir el contrato de viewport critico, porque el usuario no deberia tener que scrollear para descubrir como completar una operacion frecuente o riesgosa.
+
+Recomendacion: Mantener visibles sin scroll la entrada principal, el registro en curso, el total/estado, los bloqueos y la accion principal. El scroll puede quedar para historial, auditoria, opciones avanzadas y acciones secundarias.
+
+En la pantalla objetivo, que informacion y que accion tienen que estar si o si visibles en el primer viewport para completar el trabajo?
 ```
 
 Bad example:
@@ -206,7 +252,7 @@ view-ux-brief.md
 ui-handoff.md
 ```
 
-If a legacy screenshot exists, store or reference it in the same folder when possible.
+If legacy screenshots exist, store or reference all of them in the same folder when possible. Use descriptive names for secondary surfaces, such as `main-screen.png`, `approval-modal.png`, or `lookup-dialog.png`.
 
 Do not overwrite existing files without user confirmation.
 
@@ -230,9 +276,10 @@ It should include:
 - What not to include
 - Which states and interactions are required
 - Field-by-field traceability
+- Capture-by-capture traceability when multiple screenshots or secondary surfaces exist
 - Data contract with expected entities, fields, arrays, status values, nullability, and sample data notes
 - Which UX intent must be preserved
-- Links to `view-ux-brief.md` and screenshot if available
+- Links to `view-ux-brief.md` and screenshots/captures if available
 
 The UI build skill must treat `ui-handoff.md` as the primary input.
 
