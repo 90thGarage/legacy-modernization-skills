@@ -9,8 +9,18 @@ Use this checklist before finishing a generated view.
 - Always-visible information is visible.
 - Secondary information uses progressive disclosure.
 - Hidden or excluded legacy information is not reintroduced.
+- The field traceability matrix is followed.
+- Each data key required by the handoff is rendered, mocked, or explicitly documented as unavailable.
 - Required actions are present.
 - Required states are represented.
+
+## Data Contract
+
+- Entities from the handoff are represented in local types, props, mock data, or integration notes.
+- Required, optional, nullable, derived, and display-only values are handled intentionally.
+- Tables/arrays follow the specified row identity, columns, empty state, row actions, and bulk actions.
+- Status values use the specified labels, business meaning, and visual treatment.
+- Missing data rules use documented fallbacks rather than ad hoc placeholders.
 
 ## shadcn Usage
 

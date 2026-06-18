@@ -40,6 +40,26 @@ Include only if the view belongs to a larger workflow.
 - Technical/system-only content:
 - Source limitations:
 
+## Screenshot Extraction
+
+Include when a legacy screenshot is available.
+
+### Visible Structure
+
+- Regions/panels/tabs:
+- Tables/lists:
+- Toolbars/action areas:
+- Status/error/warning areas:
+- Navigation or workflow indicators:
+
+### Extracted UI Inventory
+
+List visible fields, controls, actions, statuses, codes, totals, timestamps, and repeated groups.
+
+### Screenshot-Inferred Assumptions
+
+List anything inferred from layout or visual cues that has not been confirmed by the user.
+
 ## Information Architecture
 
 ### Keep Visible
@@ -61,6 +81,14 @@ Information that appears unnecessary, duplicated, obsolete, or technical. These 
 ### Needs Confirmation
 
 Items whose operational, legal, reporting, or business use is unclear.
+
+## Field Decision Matrix
+
+Every visible or described legacy field, control, action, and status must appear here.
+
+| Legacy item | Modern label | Source | Decision | Modern location | Priority | Data requirement | Confirmation | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  |  | screenshot / user / code / file | Keep visible / Move to secondary / Hide by default / Remove candidate / Needs confirmation |  | Primary / Secondary / Low | required / optional / derived / display-only / unknown | confirmed / screenshot-inferred / assumption / needs user confirmation |  |
 
 ## Proposed View Structure
 
@@ -107,6 +135,16 @@ Items whose operational, legal, reporting, or business use is unclear.
 
 List rules that must be visible or enforced in the UI.
 
+## Data And State Notes
+
+- Core entities:
+- Field groups:
+- Arrays/tables:
+- Status values:
+- Required vs optional values:
+- Derived/display-only values:
+- Unknown or ambiguous data:
+
 ## UX Rationale
 
 Use short rationales, each under 70 words.
@@ -125,4 +163,5 @@ Summarize what the implementation agent must preserve.
 - Information marked `Keep Visible` is immediately accessible.
 - Information marked `Move To Secondary` remains available without dominating the screen.
 - `Remove Candidate` items are not excluded unless confirmed.
+- Every identified legacy item appears in the field decision matrix.
 - Required states are represented in the proposed structure.

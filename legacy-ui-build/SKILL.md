@@ -19,6 +19,8 @@ Before writing code, read:
 
 If `ui-handoff.md` references `view-ux-brief.md`, read it only when the handoff is ambiguous or when UX intent is unclear.
 
+If the handoff contains a field traceability matrix or data shape contract, treat them as implementation requirements. Do not omit, rename, exclude, or reclassify fields, actions, statuses, or data relationships unless the handoff explicitly allows it.
+
 ## Inputs
 
 Required:
@@ -79,6 +81,22 @@ Before implementation, inspect the target project for:
 
 Prefer existing repo patterns over generic examples.
 
+## Handoff Contract Rules
+
+Before writing code, identify from `ui-handoff.md`:
+
+- field traceability matrix
+- data shape entities
+- fields and nullability
+- arrays, tables, and row actions
+- status values and visual treatments
+- derived/display-only values
+- example data notes
+
+Use these sections to create mock data, props, types, UI states, table columns, labels, fallbacks, and status displays.
+
+If the handoff is missing a required field, data key, nullability rule, or status value, do not silently invent product semantics. Use conservative UI placeholders and record the assumption in `implementation-notes.md`.
+
 ## Output
 
 Write code to the destination path requested by the user.
@@ -90,6 +108,7 @@ Include `implementation-notes.md` in or near the generated view folder with:
 - assumptions due to incomplete references
 - design system gaps
 - integration notes
+- field traceability or data contract gaps
 - verification performed
 
 Do not modify global styles automatically. If global token changes are needed, create proposed files or notes and ask for confirmation before changing existing globals.
@@ -114,5 +133,6 @@ Before finishing, verify:
 - The client design system controls colors, radius, spacing, density, typography, and states.
 - Local components are composition-only.
 - Missing design system data is documented as assumptions.
+- Field traceability and data contract gaps are documented as assumptions.
 - No excluded legacy content was reintroduced.
 - Required states and actions are represented.
