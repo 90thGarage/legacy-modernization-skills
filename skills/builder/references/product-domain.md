@@ -1,6 +1,6 @@
 # Product Domain
 
-Use this document to help the UI build skill understand business language and avoid generic labels.
+Use this document to help `builder` understand business language and avoid generic labels.
 
 ## Domain Overview
 

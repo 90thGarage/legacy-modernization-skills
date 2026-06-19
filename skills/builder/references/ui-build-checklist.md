@@ -1,10 +1,10 @@
-# UI Build Checklist
+# Builder Checklist
 
 Use this checklist before finishing a generated view.
 
 ## Handoff Compliance
 
-- The build goal from `ui-handoff.md` is satisfied.
+- The build goal from `<view-name>-ui-handoff.md` is satisfied.
 - The layout contract is followed.
 - Always-visible information is visible.
 - Secondary information uses progressive disclosure.
@@ -57,6 +57,17 @@ Use this checklist before finishing a generated view.
 - Actions are visually prioritized.
 - The screen looks like the client's product, not default shadcn.
 
+## UI Review Fix Plan Compliance
+
+Use when a `<view-name>-ui-review.md`, `ui-fix-plan.md`, or screenshot-based correction plan is provided.
+
+- Every Critical finding is fixed or explicitly documented as not applicable.
+- Every High finding is fixed or explicitly documented as not applicable.
+- Required changes are applied without replacing the original handoff.
+- Areas marked "Do not change" are preserved.
+- Review acceptance checks are verified.
+- Skipped findings include a concrete reason in `<view-name>-implementation-notes.md`.
+
 ## Critical Path / Viewport QA
 
 Use for high-frequency operational workflows such as billing, POS, fast entry, approvals, or irreversible submit flows.
@@ -75,7 +86,7 @@ Use for high-frequency operational workflows such as billing, POS, fast entry, a
 
 ## Verification
 
-Record commands run and results in `implementation-notes.md`.
+Record commands run and results in `<view-name>-implementation-notes.md`.
 
 ```txt
 lint:

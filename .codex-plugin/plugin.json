@@ -1,0 +1,35 @@
+{
+  "name": "90thskills",
+  "version": "0.1.0",
+  "description": "Planner, builder, and reviewer workflows for modernizing legacy business screens.",
+  "author": {
+    "name": "Matias Rojas"
+  },
+  "license": "MIT",
+  "keywords": [
+    "legacy-modernization",
+    "ux",
+    "ui",
+    "react",
+    "shadcn"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "90thSkills",
+    "shortDescription": "Plan, build, and review modern UI flows for legacy screens.",
+    "longDescription": "Codex workflows for interviewing users, producing UX handoff artifacts, building React views, and reviewing generated UI against legacy operational workflows.",
+    "developerName": "Matias Rojas",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Plan a legacy screen modernization",
+      "Build a view from a UI handoff",
+      "Review a generated UI against a legacy screen"
+    ],
+    "brandColor": "#2563EB",
+    "screenshots": []
+  }
+}

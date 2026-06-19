@@ -1,2 +1,8 @@
 legacy-modernization/
-skill-flow-test/
+skill-flow-test/*
+!skill-flow-test/next-sandbox/
+!skill-flow-test/next-sandbox/**
+skill-flow-test/next-sandbox/.next/
+skill-flow-test/next-sandbox/node_modules/
+skill-flow-test/next-sandbox/tsconfig.tsbuildinfo
+skill-flow-test/next-sandbox/.DS_Store

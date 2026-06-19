@@ -160,7 +160,7 @@ Required states:
 
 ## Data Shape
 
-This section is the implementation data contract. Be explicit enough for the UI build skill to create mock data without rereading the UX discussion.
+This section is the implementation data contract. Be explicit enough for `builder` to create mock data without rereading the UX discussion.
 
 ### Entities
 
@@ -247,5 +247,5 @@ List unresolved decisions that the UI implementation must not silently treat as 
 
 ## Source References
 
-- Full UX brief: `./view-ux-brief.md`
+- Full UX brief: `./<view-name>-ux-brief.md`
 - Legacy screenshots / captures:

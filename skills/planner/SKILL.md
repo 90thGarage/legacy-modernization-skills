@@ -1,16 +1,39 @@
 ---
-name: legacy-ux-brief
-description: Create UX architecture briefs and UI handoffs for modernizing legacy PowerBuilder-style screens into focused web app views.
+name: planner
+description: Interview-first UX brief skill for legacy screen modernization. When invoked, ask one UX interview question before drafting or implementing; do not edit app code until the brief and handoff are approved.
 ---
 
 Use this skill when the user wants to modernize a legacy product screen, especially from PowerBuilder or another dense enterprise/business management UI, into a clearer web app view.
+
+## Invocation Contract
+
+This is a UX discovery and handoff skill, not an implementation skill.
+
+When the user explicitly names `planner`, the skill's interview flow takes priority over any implementation wording in the prompt. Phrases like "agregar el flujo", "crear la pantalla", "meterlo en la app", "implementar", "build", "add", or "use this to add" still mean: start the UX interview first.
+
+The first user-facing response after reading the required references must be one interview question in the required format. Do not propose a code plan, inspect implementation details for editing, create files, or change routes/components before the interview has produced and approved `<view-name>-ux-brief.md` and `<view-name>-ui-handoff.md`.
+
+If the user wants to skip the interview, they must explicitly say to draft with open assumptions or provide an already-approved brief/handoff. Otherwise, ask the first UX question and stop.
+
+## Misclassification Guard
+
+Prompts that mention a target repository, route, feature folder, app shell, navigation, or existing app are context for the eventual handoff. They are not permission to implement.
+
+For example, a prompt shaped like "Usa planner para agregar el flujo X dentro de la misma app existente en Y" must be handled as:
+
+1. Read this skill and the required references.
+2. Inspect only enough local context to understand the named app/module if needed for the UX question.
+3. Ask `Pregunta 1:` about the highest-risk UX/workflow decision.
+4. Wait for the user's answer.
+
+It must not be handled as a code-editing task until the interview, brief, handoff, and explicit implementation approval are complete.
 
 Act as a senior product and UX partner for legacy modernization, not as a passive transcription tool. Preserve operational truth while challenging legacy structure. Identify what must remain recognizable, what can be simplified, what should be automated, what needs confirmation, and what should become a clearer modern workflow.
 
 The goal is to produce two artifacts:
 
-- `view-ux-brief.md`: full UX reasoning and screen architecture for humans.
-- `ui-handoff.md`: implementation-focused contract for the UI build skill.
+- `<view-name>-ux-brief.md`: full UX reasoning and screen architecture for humans.
+- `<view-name>-ui-handoff.md`: implementation-focused contract for `builder`.
 
 ## Required References
 
@@ -70,11 +93,32 @@ Mark anything inferred from screenshots as `screenshot-inferred` unless the user
 
 This skill is an interview-first workflow, like `grill-me`.
 
-Do not create `view-ux-brief.md` or `ui-handoff.md` until the interview has enough information or the user explicitly asks for a draft with open assumptions. First gather input, inspect available screenshots/files, ask dynamic follow-up questions, and keep an internal interview state.
+Do not create `<view-name>-ux-brief.md` or `<view-name>-ui-handoff.md` until the interview has enough information or the user explicitly asks for a draft with open assumptions. First gather input, inspect available screenshots/files, ask dynamic follow-up questions, and keep an internal interview state.
 
 Ask exactly one question per assistant turn and wait for the user's answer before asking the next question or writing artifacts.
 
 Never ask all questions up front. Never send a questionnaire. Never write the final artifacts in the same turn as an unanswered question.
+
+## Hard Stop: Interview Before Implementation
+
+If the user explicitly invokes this skill, do not edit application code in the same turn unless the user has already provided an approved `<view-name>-ux-brief.md` and `<view-name>-ui-handoff.md` for this view.
+
+Even if the user asks to "add", "build", "implement", "create in the app", or otherwise requests implementation, this skill must first run the interview flow.
+
+The first assistant response after reading the required references must be exactly one UX interview question using the `Pregunta N:` / `Question N:` format, unless the user explicitly says to create a draft with open assumptions without an interview.
+
+Do not create code, routes, components, styles, implementation notes, or other build artifacts while unresolved interview questions remain.
+
+## Combined UX And Implementation Requests
+
+If implementation is requested together with this skill:
+
+1. Run the UX interview.
+2. Write `<view-name>-ux-brief.md` and `<view-name>-ui-handoff.md`.
+3. Ask for approval or explicit permission to proceed to implementation.
+4. Only after approval, use the appropriate build/code-editing workflow.
+
+A screenshot of a related workflow is not enough to infer a different workflow's data contract. Treat it as visual/context evidence only and ask at least one workflow-defining question before drafting or implementing.
 
 For each question:
 
@@ -237,22 +281,22 @@ Do not silently drop an item from the handoff. If a field is not understood, mar
 
 ## Output Location
 
-Use one folder per migrated view.
+Use one flat file per artifact. Do not create one folder per migrated view.
 
-Default path:
-
-```txt
-legacy-modernization/views/<view-name-kebab-case>/
-```
-
-Write:
+Default directory:
 
 ```txt
-view-ux-brief.md
-ui-handoff.md
+docs/ux/
 ```
 
-If legacy screenshots exist, store or reference all of them in the same folder when possible. Use descriptive names for secondary surfaces, such as `main-screen.png`, `approval-modal.png`, or `lookup-dialog.png`.
+Use the migrated view name as a kebab-case filename prefix:
+
+```txt
+<view-name>-ux-brief.md
+<view-name>-ui-handoff.md
+```
+
+If legacy screenshots exist, store or reference them in the same directory when possible. Use the same prefix plus a descriptive suffix, such as `<view-name>-main-screen.png`, `<view-name>-approval-modal.png`, or `<view-name>-lookup-dialog.png`.
 
 Do not overwrite existing files without user confirmation.
 
@@ -266,7 +310,7 @@ Include short rationales for important UX decisions. Keep each rationale under 7
 
 ## Handoff Rule
 
-The `ui-handoff.md` must be prescriptive enough for an implementation agent to build the view without rereading the whole UX discussion.
+The `<view-name>-ui-handoff.md` must be prescriptive enough for an implementation agent to build the view without rereading the whole UX discussion.
 
 It should include:
 
@@ -279,9 +323,9 @@ It should include:
 - Capture-by-capture traceability when multiple screenshots or secondary surfaces exist
 - Data contract with expected entities, fields, arrays, status values, nullability, and sample data notes
 - Which UX intent must be preserved
-- Links to `view-ux-brief.md` and screenshots/captures if available
+- Links to `<view-name>-ux-brief.md` and screenshots/captures if available
 
-The UI build skill must treat `ui-handoff.md` as the primary input.
+`builder` must treat `<view-name>-ui-handoff.md` as the primary input.
 
 ## Completion Checklist
 

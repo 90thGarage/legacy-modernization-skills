@@ -199,7 +199,7 @@ Use neutral surfaces first: `background` for the page, `surface` for panels, `bo
 
 Use `Suisse Intl` for readable business content. Use `Geist Mono` for buttons, labels, metadata, navigation, table headers, numeric/operational commands, and compact status text. Use `Neue Montreal` only for brand/display assets such as the logo.
 
-Generated views must actually load or inherit these fonts. Do not only set `font-family` names if the repo has no font import. If fonts are missing, document the exact missing setup in `implementation-notes.md` and use explicit fallbacks:
+Generated views must actually load or inherit these fonts. Do not only set `font-family` names if the repo has no font import. If fonts are missing, document the exact missing setup in `<view-name>-implementation-notes.md` and use explicit fallbacks:
 
 - `Suisse Intl`, then Arial/system sans.
 - `Geist Mono`, then Menlo/Consolas/monospace.

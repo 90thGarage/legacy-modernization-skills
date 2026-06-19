@@ -1,6 +1,6 @@
 # Assets
 
-Place client assets here so the UI build skill can reference them from `references/design.md`.
+Place client assets here so `builder` can reference them from `references/design.md`.
 
 Suggested structure:
 

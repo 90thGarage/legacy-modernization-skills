@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-suisse-intl);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-suisse-intl);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: var(--radius);
+  --radius-2xl: var(--radius);
+  --radius-3xl: var(--radius);
+  --radius-4xl: var(--radius);
+}
+
+:root {
+  --font-suisse-intl: "Suisse Intl", Arial, sans-serif;
+  --font-geist-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-neue-montreal: "Neue Montreal", Arial, sans-serif;
+  --background: #f5f5f5;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #0057ff;
+  --primary-foreground: #ffffff;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ffffff;
+  --muted: #f5f5f5;
+  --muted-foreground: #7a7a7a;
+  --accent: #ececec;
+  --accent-foreground: #1a1a1a;
+  --destructive: #dc2626;
+  --border: #d3d3d3;
+  --input: #999999;
+  --ring: #0057ff;
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.25rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #0057ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f5f5;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: #d3d3d3;
+  --sidebar-ring: #0057ff;
+}
+
+.dark {
+  --background: #0f1115;
+  --foreground: #f5f7fa;
+  --card: #171a20;
+  --card-foreground: #f5f7fa;
+  --popover: #171a20;
+  --popover-foreground: #f5f7fa;
+  --primary: #3b7cff;
+  --primary-foreground: #ffffff;
+  --secondary: #252a33;
+  --secondary-foreground: #f5f7fa;
+  --muted: #20242c;
+  --muted-foreground: #a8b0bd;
+  --accent: #252a33;
+  --accent-foreground: #f5f7fa;
+  --destructive: #f87171;
+  --border: #343a46;
+  --input: #566070;
+  --ring: #6c9cff;
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: #171a20;
+  --sidebar-foreground: #f5f7fa;
+  --sidebar-primary: #3b7cff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #20242c;
+  --sidebar-accent-foreground: #f5f7fa;
+  --sidebar-border: #343a46;
+  --sidebar-ring: #6c9cff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-suisse-intl);
+  }
+  html {
+    @apply font-sans;
+  }
+  input,
+  select,
+  textarea {
+    @apply bg-card text-foreground;
+  }
+  .dark {
+    color-scheme: dark;
+  }
+}
+
+@layer components {
+  .input-operational {
+    @apply h-10 rounded-[4px] border border-input bg-card px-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25;
+  }
+}
