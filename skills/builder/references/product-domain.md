@@ -2,6 +2,10 @@
 
 Use this document to help `builder` understand business language and avoid generic labels.
 
+This file is a builder-local fallback. Prefer `docs/ux/product-context.md` when it exists, because product context is the canonical source for product language, roles, flows, entities, permissions, reusable patterns, and modernization decisions.
+
+If this file conflicts with `docs/ux/product-context.md`, follow product context and record the conflict in implementation notes.
+
 ## Domain Overview
 
 - Product:

@@ -16,9 +16,10 @@ Use the `builder` skill.
 
 1. Read the `builder` skill and its required references.
 2. Read the provided handoff before editing code.
-3. If a review file is provided, treat it as a correction contract layered on top of the handoff.
-4. Build in the user-specified destination.
-5. Write implementation notes back to `docs/ux/`.
+3. Read product context and flow context if the handoff references them.
+4. If a review file is provided, treat it as a correction contract layered on top of the handoff.
+5. Build in the user-specified destination.
+6. Write implementation notes back to `docs/ux/`.
 
 ## Outputs
 

@@ -16,9 +16,10 @@ Use the `reviewer` skill.
 ## Workflow
 
 1. Read the `reviewer` skill and its required references.
-2. Compare the generated UI against the handoff, design system, legacy evidence, and feedback.
-3. Produce findings ordered by severity.
-4. Save the correction plan under `docs/ux/`.
+2. Read product context and flow context when available.
+3. Compare the generated UI against the product journey, handoff, design system, legacy evidence, and feedback.
+4. Produce findings ordered by severity.
+5. Save the correction plan under `docs/ux/`.
 
 ## Output
 

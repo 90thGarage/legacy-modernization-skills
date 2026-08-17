@@ -4,6 +4,13 @@
 
 Describe the exact view to build and the primary task it supports.
 
+## Product Context References
+
+- Product context: `./product-context.md`
+- Flow context: `./flows/<flow-id>.md`
+- Full UX brief: `./<view-name>-ux-brief.md`
+- Request classification: new flow / existing flow extension / existing flow correction / single-view modernization / missing dependency
+
 ## Product UX Intent
 
 - Operational truth to preserve:
@@ -11,6 +18,9 @@ Describe the exact view to build and the primary task it supports.
 - Primary workflow improvement:
 - Existing user recognition to preserve:
 - Training-free adoption requirements:
+- Product-level decisions to preserve:
+- Product-level assumptions:
+- Product-level conflicts or contradictions:
 
 ## Layout Contract
 
@@ -21,6 +31,19 @@ Describe the exact view to build and the primary task it supports.
 - Dialogs/modals/secondary surfaces:
 - Action area:
 - Responsive behavior:
+
+### Space Utilization And Completion Flow
+
+- Direction of progress:
+- Final required input:
+- Completion action placement:
+- Sticky/fixed completion behavior:
+- How contextual columns end:
+- How following sections reclaim available width:
+- Where derived totals close their source table or working region:
+- Independent purpose required for any lateral summary:
+- Empty-space risks to avoid:
+- How the next action is communicated without training:
 
 ## Critical Viewport Contract
 
@@ -83,6 +106,16 @@ Every legacy field, control, action, visible status, code, total, and repeated g
 - Technical choices translated to user choices:
 - Validation moved earlier:
 - User control preserved:
+
+### Flow Integration
+
+- Entry points:
+- Exit points:
+- Previous flow step:
+- Next flow step:
+- Blocking dependencies:
+- Existing modern views to modify instead of duplicate:
+- Integration assumptions:
 
 ## Component Strategy
 
@@ -244,8 +277,13 @@ List unresolved decisions that the UI implementation must not silently treat as 
 - Every identified legacy item is represented in the field traceability matrix.
 - The data shape is specific enough to build realistic mock data and UI states.
 - Visual implementation follows the design system and shadcn strategy.
+- Sequential forms place completion after the required input sequence, using a bottom sticky bar when the action must remain visible.
+- Contextual columns do not create empty reserved space after their associated content ends.
+- Table-derived totals remain attached to their source and are not duplicated in a lateral summary without an independent purpose.
 
 ## Source References
 
 - Full UX brief: `./<view-name>-ux-brief.md`
+- Product context: `./product-context.md`
+- Flow context: `./flows/<flow-id>.md`
 - Legacy screenshots / captures:

@@ -10,10 +10,24 @@ Summary:
 
 - Generated UI:
 - Legacy source screenshot(s):
+- Product context:
+- Flow context:
 - UX brief:
 - UI handoff:
 - Design system:
 - User feedback:
+
+## Product Flow Assessment
+
+- Target journey:
+- Request classification:
+- Entry points represented:
+- Exit points represented:
+- Blocking dependencies:
+- Product language consistency:
+- Role/permission consistency:
+- Reusable patterns followed:
+- Product-level assumptions documented:
 
 ## Critical Workflow Assessment
 
@@ -84,6 +98,9 @@ Do not change:
 
 ## Acceptance Checks
 
+- The screen fits the documented product journey and does not skip required flow dependencies.
+- Product labels, entities, roles, permissions, and reusable patterns match product context.
+- Blocking dependencies are represented, gated, or documented rather than hidden.
 - Critical path fits the baseline desktop viewport without requiring scroll.
 - Item/product search sits directly above the working item list when applicable.
 - Primary action, total/status, and blocking validation are visible without scroll.

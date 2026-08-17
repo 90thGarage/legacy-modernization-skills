@@ -14,9 +14,10 @@ Use the `planner` skill.
 ## Workflow
 
 1. Read the `planner` skill and its required references.
-2. Follow the interview-first contract.
-3. Ask exactly one UX question before drafting unless the user explicitly asks for a draft with open assumptions.
-4. When approved to write artifacts, save flat files under `docs/ux/`.
+2. Read `docs/ux/product-context.md` and the relevant `docs/ux/flows/<flow-id>.md` when present.
+3. Follow the product-context-aware interview contract.
+4. Ask exactly one UX question before drafting unless product context already resolves the high-risk decisions or the user explicitly asks for a draft with open assumptions.
+5. When approved to write artifacts, save flat files under `docs/ux/`.
 
 ## Outputs
 

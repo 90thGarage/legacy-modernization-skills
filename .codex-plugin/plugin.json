@@ -1,7 +1,7 @@
 {
   "name": "90thskills",
   "version": "0.1.0",
-  "description": "Planner, builder, and reviewer workflows for modernizing legacy business screens.",
+  "description": "Conversational product assistance and expert workflows for understanding, documenting, and modernizing legacy product flows.",
   "author": {
     "name": "Matias Rojas"
   },
@@ -16,8 +16,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "90thSkills",
-    "shortDescription": "Plan, build, and review modern UI flows for legacy screens.",
-    "longDescription": "Codex workflows for interviewing users, producing UX handoff artifacts, building React views, and reviewing generated UI against legacy operational workflows.",
+    "shortDescription": "Understand, document, and modernize product flows.",
+    "longDescription": "A conversational Product Assistant backed by specialist workflows for product documentation, UX planning, React implementation, and product-flow review.",
     "developerName": "Matias Rojas",
     "category": "Developer Tools",
     "capabilities": [
@@ -25,6 +25,8 @@
       "Write"
     ],
     "defaultPrompt": [
+      "Preguntale al Asistente de Producto como funciona un flujo",
+      "Explora y documenta una mejora de producto",
       "Plan a legacy screen modernization",
       "Build a view from a UI handoff",
       "Review a generated UI against a legacy screen"

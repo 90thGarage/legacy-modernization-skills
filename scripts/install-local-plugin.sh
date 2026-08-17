@@ -62,6 +62,8 @@ cat <<EOF
 Installed 90thskills.
 
 Restart Codex or open a new thread before using:
+  /producto
+  /product-modernizer
   /planner
   /builder
   /reviewer

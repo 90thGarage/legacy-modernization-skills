@@ -40,6 +40,24 @@ colors:
   border: "#D3D3D3"
   border-strong: "#999999"
   divider: "#E6E6E6"
+colors-dark:
+  primary: "#0057FF"
+  primary-hover: "#0041BF"
+  secondary: "#EDEDED"
+  accent: "#0057FF"
+  background: "#000000"
+  surface: "#000000"
+  muted-surface: "#1A1A1A"
+  blue-muted-surface: "#06193A"
+  blue-icon-surface: "#022248"
+  text-primary: "#EDEDED"
+  text-strong: "#FFFFFF"
+  text-secondary: "#A0A0A0"
+  text-muted: "#878787"
+  text-inverse: "#000000"
+  border: "#2E2E2E"
+  border-strong: "#454545"
+  divider: "#1F1F1F"
 typography:
   body-14:
     fontFamily: "Suisse Intl"
@@ -215,6 +233,12 @@ When the user is adding items, place the product/code/name search input directly
 
 Use the main table/list as the scrollable region when vertical space is constrained. Keep action rails or bottom action bars fixed/sticky when needed. Secondary actions should be grouped, collapsed, or placed below the critical path.
 
+Do not preserve empty columns after their contextual content ends. If a sidebar only accompanies one section, close that grid after the section and allow following content to span the available width.
+
+Keep totals and other derived values structurally attached to their source. For item tables, prefer compact footer rows aligned with the numeric columns. Do not create a lateral summary card only to restate table-derived values or duplicate a dominant total already present in the completion bar. Reserve side panels for independent contextual work, decisions, or navigation.
+
+For top-to-bottom forms, place the completion action after the last required input in visual and DOM order. A sticky bottom action bar may keep it visible throughout the task; visibility is not a reason to place finalization in the header before the form.
+
 ## Shapes
 
 Use 4px radius everywhere by default: buttons, inputs, panels, cards, tables, badges, tabs, dialogs, drawers, and operational sections. Do not mix radius families in the same view. Avoid pill controls unless an existing repo component requires them.
@@ -250,6 +274,9 @@ Errors should say what happened and what to do next. Disabled critical actions s
 - Use blue and black intentionally for hierarchy.
 - Keep item search directly above the working list/table.
 - Keep the primary action visible in the critical viewport.
+- Make the primary action follow the natural direction of the workflow.
+- Let later sections reclaim width when a contextual sidebar ends.
+- Close working tables with their derived totals instead of duplicating them in an ornamental side summary.
 - Verify that fonts are actually loaded.
 - Document missing tokens, fonts, or states as assumptions.
 
@@ -258,6 +285,9 @@ Errors should say what happened and what to do next. Disabled critical actions s
 - Do not turn operational screens into spacious marketing/card layouts.
 - Do not use border radius above 4px unless forced by an existing component.
 - Do not hide the primary completion action below scroll.
+- Do not place the only completion action above a long sequential form.
+- Do not leave a reserved column empty while the primary workflow continues beside it.
+- Do not reduce the working surface for a lateral summary that only repeats derived values.
 - Do not make all actions visually equal.
 - Do not invent colors outside the InfoManager blue/black/neutral base without product reason.
 - Do not claim typography compliance when the app is falling back silently to browser defaults.

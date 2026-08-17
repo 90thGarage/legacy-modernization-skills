@@ -5,6 +5,9 @@ Use this checklist before finishing a generated view.
 ## Handoff Compliance
 
 - The build goal from `<view-name>-ui-handoff.md` is satisfied.
+- Product context and flow references from the handoff were read when available.
+- Product-level labels, entities, roles, permissions, and reusable patterns are followed.
+- Flow integration requirements, entry points, exit points, and blocking dependencies are represented or documented.
 - The layout contract is followed.
 - Always-visible information is visible.
 - Secondary information uses progressive disclosure.
@@ -16,6 +19,7 @@ Use this checklist before finishing a generated view.
 
 ## Data Contract
 
+- Shared entities from product context are not renamed or reshaped without a handoff instruction.
 - Entities from the handoff are represented in local types, props, mock data, or integration notes.
 - Required, optional, nullable, derived, and display-only values are handled intentionally.
 - Tables/arrays follow the specified row identity, columns, empty state, row actions, and bulk actions.
@@ -56,6 +60,12 @@ Use this checklist before finishing a generated view.
 - Empty, loading, error, and permission states do not look broken.
 - Actions are visually prioritized.
 - The screen looks like the client's product, not default shadcn.
+- No column, rail, or fixed-height region remains empty while the primary workflow continues in a narrower adjacent area.
+- Derived values stay attached to the table or input surface that produces them unless a separate panel has an independent contextual purpose.
+- A lateral summary does not duplicate a dominant total already visible in the completion bar.
+- Sequential forms follow a clear context → input → review → completion order.
+- The only completion action is not placed above a form that progresses downward.
+- Sticky completion bars are last in DOM order and explain the next action or blocking state.
 
 ## UI Review Fix Plan Compliance
 
@@ -89,6 +99,8 @@ Use for high-frequency operational workflows such as billing, POS, fast entry, a
 Record commands run and results in `<view-name>-implementation-notes.md`.
 
 ```txt
+product context:
+flow context:
 lint:
 typecheck:
 test:

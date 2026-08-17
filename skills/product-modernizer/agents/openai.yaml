@@ -1,0 +1,7 @@
+interface:
+  display_name: "Asistente de Producto"
+  short_description: "Entiende, mejora y lleva flujos al prototipo"
+  default_prompt: "Usá $product-modernizer para entender, mejorar o incorporar algo al producto."
+
+policy:
+  allow_implicit_invocation: true

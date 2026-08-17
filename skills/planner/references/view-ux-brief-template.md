@@ -4,10 +4,22 @@
 
 - View ID:
 - Source:
+- Product context:
+- Flow context:
 - Created:
 - Status:
 - Confidence:
 - Language:
+
+## Product Context Alignment
+
+- Product context source:
+- Flow context source:
+- Request classification: new flow / existing flow extension / existing flow correction / single-view modernization / missing dependency
+- Product-level decisions reused:
+- Product-level conflicts or contradictions:
+- Product-level assumptions:
+- Related reusable product patterns:
 
 ## Module Context
 
@@ -19,6 +31,8 @@ Include only if the view belongs to a larger workflow.
 - Related views:
 - Shared entities:
 - Role or permission dependencies:
+- Blocking dependencies:
+- Integration assumptions:
 
 ## User And Context
 
@@ -270,6 +284,11 @@ Use short rationales, each under 70 words.
 ## Open Questions And Assumptions
 
 Separate confirmed facts from assumptions.
+
+## Product Context References
+
+- Product context: `./product-context.md`
+- Flow context: `./flows/<flow-id>.md`
 
 ## UI Handoff Notes
 

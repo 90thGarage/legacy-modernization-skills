@@ -12,12 +12,15 @@ The skill builds code in the user-specified destination. It does not deeply inte
 Before writing code, read:
 
 - The provided `<view-name>-ui-handoff.md`
+- `../shared/references/product-modernization-rules.md`
 - `references/design.md`
 - `references/component-library.md`
 - `references/product-domain.md`
 - `references/ui-build-checklist.md`
 
 If `<view-name>-ui-handoff.md` references `<view-name>-ux-brief.md`, read it only when the handoff is ambiguous or when UX intent is unclear.
+
+If the handoff references `docs/ux/product-context.md` or `docs/ux/flows/<flow-id>.md`, read them before implementation. Treat documented roles, journeys, labels, entities, permissions, reusable patterns, and global UX rules as product requirements.
 
 If the handoff contains a field traceability matrix or data shape contract, treat them as implementation requirements. Do not omit, rename, exclude, or reclassify fields, actions, statuses, or data relationships unless the handoff explicitly allows it.
 
@@ -33,6 +36,8 @@ Recommended:
 
 - `<view-name>-ux-brief.md`
 - `<view-name>-ui-review.md` or another UI correction plan
+- `docs/ux/product-context.md`
+- `docs/ux/flows/<flow-id>.md`
 - Legacy screenshot
 - Existing repo conventions
 - Completed design system reference
@@ -87,6 +92,8 @@ Prefer existing repo patterns over generic examples.
 
 Before writing code, identify from `<view-name>-ui-handoff.md`:
 
+- product context references
+- flow integration requirements
 - field traceability matrix
 - critical viewport contract
 - data shape entities
@@ -99,6 +106,19 @@ Before writing code, identify from `<view-name>-ui-handoff.md`:
 Use these sections to create mock data, props, types, UI states, table columns, labels, fallbacks, and status displays.
 
 If the handoff is missing a required field, data key, nullability rule, or status value, do not silently invent product semantics. Use conservative UI placeholders and record the assumption in `<view-name>-implementation-notes.md`.
+
+## Product Context Contract Rules
+
+When product context or flow context is available:
+
+- use product-level labels, entities, roles, permissions, and navigation language
+- preserve reusable product patterns listed in the context
+- do not create a one-off interaction when the context defines a shared pattern
+- do not duplicate an existing modern view if the flow context says to modify or extend it
+- do not mark a blocking dependency as complete unless the handoff or context confirms it
+- record any product-context conflict or missing dependency in implementation notes
+
+`builder` implements contracts. It may adapt layout, density, and component composition to the target React project, but it should not invent product semantics that belong in product context, flow context, or the handoff.
 
 ## UI Review / Fix Plan Rule
 
@@ -167,6 +187,7 @@ Include:
 
 - shadcn components used
 - design tokens used
+- product context and flow context applied
 - assumptions due to incomplete references
 - design system gaps
 - integration notes

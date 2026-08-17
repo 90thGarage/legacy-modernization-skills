@@ -1,6 +1,6 @@
 ---
 name: planner
-description: Interview-first UX brief skill for legacy screen modernization. When invoked, ask one UX interview question before drafting or implementing; do not edit app code until the brief and handoff are approved.
+description: Product-context-aware UX brief skill for legacy screen or flow modernization. Reads product context first, asks only unresolved UX questions, and does not edit app code until the brief and handoff are approved.
 ---
 
 Use this skill when the user wants to modernize a legacy product screen, especially from PowerBuilder or another dense enterprise/business management UI, into a clearer web app view.
@@ -11,7 +11,7 @@ This is a UX discovery and handoff skill, not an implementation skill.
 
 When the user explicitly names `planner`, the skill's interview flow takes priority over any implementation wording in the prompt. Phrases like "agregar el flujo", "crear la pantalla", "meterlo en la app", "implementar", "build", "add", or "use this to add" still mean: start the UX interview first.
 
-The first user-facing response after reading the required references must be one interview question in the required format. Do not propose a code plan, inspect implementation details for editing, create files, or change routes/components before the interview has produced and approved `<view-name>-ux-brief.md` and `<view-name>-ui-handoff.md`.
+The first user-facing response after reading the required references and any available product context must be one interview question in the required format unless product context already resolves the high-risk UX decisions or the user explicitly asks for a draft with open assumptions. Do not propose a code plan, inspect implementation details for editing, create files, or change routes/components before the interview or product-context pass has produced and approved `<view-name>-ux-brief.md` and `<view-name>-ui-handoff.md`.
 
 If the user wants to skip the interview, they must explicitly say to draft with open assumptions or provide an already-approved brief/handoff. Otherwise, ask the first UX question and stop.
 
@@ -39,9 +39,17 @@ The goal is to produce two artifacts:
 
 Before interviewing or writing artifacts, read:
 
+- `../shared/references/product-modernization-rules.md`
 - `references/ux-principles.md`
 - `references/view-ux-brief-template.md`
 - `references/ui-handoff-template.md`
+
+Then read, when present:
+
+- `docs/ux/product-context.md`
+- the relevant `docs/ux/flows/<flow-id>.md`
+
+If product context exists, use it as the starting point for roles, journeys, entities, navigation, permissions, reusable patterns, legacy anti-patterns, and already-made decisions. Do not ask the user to restate facts already documented there.
 
 ## Inputs
 
@@ -54,6 +62,23 @@ Accept any of these input levels:
 Do not block if there is no screenshot. Mark this as a source limitation in the brief.
 
 If the workflow includes modals, popups, lookup windows, confirmation dialogs, validation dialogs, secondary tabs, expanded row details, or alternate states, ask for screenshots or descriptions of those surfaces unless the user already provided them.
+
+## Product Context Gate
+
+Early in the workflow, determine whether the requested view belongs to an existing product flow.
+
+If `docs/ux/product-context.md` or a relevant flow file exists:
+
+- identify whether the request is a new flow, existing flow extension, existing flow correction, single-view modernization inside a known flow, or missing dependency for another flow
+- read the relevant flow file before asking questions
+- map previous and next workflow steps
+- identify shared entities, permissions, and reusable product patterns
+- detect whether a current modern view should be modified instead of creating a new view
+- mark unresolved blocking dependencies in the brief and handoff
+
+Ask follow-up questions only for unresolved product decisions that materially change the flow, permissions, data loss risk, irreversible behavior, or screen architecture.
+
+If product context is missing, continue with the legacy-screen interview and mark the missing context as a source limitation.
 
 ## Screenshot Analysis
 
@@ -93,7 +118,7 @@ Mark anything inferred from screenshots as `screenshot-inferred` unless the user
 
 This skill is an interview-first workflow, like `grill-me`.
 
-Do not create `<view-name>-ux-brief.md` or `<view-name>-ui-handoff.md` until the interview has enough information or the user explicitly asks for a draft with open assumptions. First gather input, inspect available screenshots/files, ask dynamic follow-up questions, and keep an internal interview state.
+Do not create `<view-name>-ux-brief.md` or `<view-name>-ui-handoff.md` until the interview and product-context pass have enough information or the user explicitly asks for a draft with open assumptions. First gather input, inspect available screenshots/files/product context, ask dynamic follow-up questions, and keep an internal interview state.
 
 Ask exactly one question per assistant turn and wait for the user's answer before asking the next question or writing artifacts.
 
@@ -105,7 +130,7 @@ If the user explicitly invokes this skill, do not edit application code in the s
 
 Even if the user asks to "add", "build", "implement", "create in the app", or otherwise requests implementation, this skill must first run the interview flow.
 
-The first assistant response after reading the required references must be exactly one UX interview question using the `Pregunta N:` / `Question N:` format, unless the user explicitly says to create a draft with open assumptions without an interview.
+The first assistant response after reading the required references and available product context must be exactly one UX interview question using the `Pregunta N:` / `Question N:` format, unless product context already resolves the high-risk decisions or the user explicitly says to create a draft with open assumptions without an interview.
 
 Do not create code, routes, components, styles, implementation notes, or other build artifacts while unresolved interview questions remain.
 
@@ -167,6 +192,10 @@ Maintain these interview notes internally during the conversation:
 - legacy layout strengths that should be preserved even if the visual design changes
 - fields, actions, states, or rules that still need classification
 - screenshot captures and secondary surfaces already analyzed
+- product context and flow files already read
+- flow request classification: new flow, extension, correction, single-view modernization, or missing dependency
+- blocking dependencies and integration assumptions
+- product-level decisions reused instead of re-asked
 - remove candidates requiring confirmation
 - hidden-by-default information requiring confirmation
 - output path and overwrite status
@@ -175,7 +204,7 @@ After each user answer, decide whether the next highest-value step is:
 
 1. ask a follow-up on the same decision branch
 2. move to the next unresolved UX decision
-3. write the two artifacts because the user explicitly asked for output or the interview is complete
+3. write the two artifacts because the user explicitly asked for output or the interview/product-context pass is complete
 
 Before writing artifacts, briefly summarize the resolved decisions and remaining assumptions. If the output path would overwrite existing files, ask for confirmation before writing.
 
@@ -241,7 +270,7 @@ Bad example:
 Pregunta 3: Que datos son importantes?
 ```
 
-## Context Gate
+## Legacy Context Gate
 
 Early in the interview, determine whether the view belongs to a larger workflow or module.
 
@@ -323,6 +352,7 @@ It should include:
 - Capture-by-capture traceability when multiple screenshots or secondary surfaces exist
 - Data contract with expected entities, fields, arrays, status values, nullability, and sample data notes
 - Which UX intent must be preserved
+- Links to `docs/ux/product-context.md` and the relevant `docs/ux/flows/<flow-id>.md` when available
 - Links to `<view-name>-ux-brief.md` and screenshots/captures if available
 
 `builder` must treat `<view-name>-ui-handoff.md` as the primary input.
