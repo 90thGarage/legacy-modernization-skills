@@ -1,44 +1,182 @@
 # 90thSkills
 
-Playground local para entender, documentar y modernizar productos legacy con Codex.
+90thSkills ayuda a entender, documentar y modernizar productos legacy con Codex.
 
-El repo trae un asistente de producto y tres skills especialistas:
+La entrada recomendada es el **Asistente de Producto**. Se conversa con lenguaje natural y coordina tres skills especialistas: `planner`, `builder` y `reviewer`.
 
-- `product-modernizer`: se presenta como **Asistente de Producto**; entiende el producto, explora ideas, mantiene su documentacion y coordina modernizaciones completas.
-- `planner`: planifica la experiencia UX y genera artefactos de handoff.
-- `builder`: construye una vista React/Next desde el handoff.
-- `reviewer`: revisa la UI generada y escribe un plan de correcciones.
+El repositorio también incluye documentación de producto y un prototipo navegable de InfoManager para probar los flujos sin tocar una aplicación real.
 
-Tambien incluye un proyecto Next limpio en `skill-flow-test/next-sandbox/` para probar el flujo completo sin tocar una app real.
+## Para qué sirve
 
-## Primeros pasos despues de clonar
+- Consultar cómo funciona hoy un producto o flujo.
+- Explorar mejoras antes de documentarlas o construirlas.
+- Mantener sincronizados el contexto global, los flujos y su registro.
+- Convertir una decisión de producto en un handoff UX implementable.
+- Construir y revisar vistas React dentro de un prototipo.
 
-### Si usas Codex
+## Inicio rápido
 
-Desde la raiz del repo:
+Con el plugin instalado, elegí **Asistente de Producto** desde el selector o escribí `/producto` seguido de un pedido normal.
+
+```txt
+/producto ¿Cómo funcionan hoy los cobros?
+/producto Tengo una idea para permitir pagos parciales
+/producto Dejá documentada la alternativa que elegimos
+/producto Llevá esta mejora al prototipo
+```
+
+No hace falta elegir modos, completar parámetros ni conocer las otras skills. El asistente interpreta la intención a partir de la conversación.
+
+Si todavía no instalaste el plugin, consultá [Instalación](#instalación).
+
+## Cómo responde el Asistente de Producto
+
+El asistente usa cuatro comportamientos internos. El usuario no necesita conocerlos ni seleccionarlos.
+
+| Lo que pide el usuario | Qué hace el asistente | Qué puede modificar |
+| --- | --- | --- |
+| “¿Cómo funciona…?” | Lee la documentación y explica el comportamiento actual. | Nada. |
+| “Tengo una idea…” | Analiza alternativas, impacto y dependencias. | Nada. |
+| “Documentalo” | Registra la decisión y sincroniza los documentos relacionados. | Solo documentación. |
+| “Llevalo al prototipo” | Documenta, planifica, construye y revisa la mejora. | Documentación y código del prototipo. |
+
+Una frase como “me gusta esa opción” no autoriza cambios. El asistente ofrece documentarla, llevarla al prototipo o seguir explorando.
+
+Si el pedido es ambiguo, permanece en solo lectura. Si el usuario ya pidió documentar o implementar, no solicita una confirmación redundante.
+
+El comando `/product-modernizer` se conserva como alias compatible. `/producto` es la entrada recomendada para el uso cotidiano.
+
+## Cómo consume la documentación
+
+El asistente empieza por las fuentes que permiten ubicar el pedido dentro del producto:
+
+```txt
+docs/ux/flows/README.md
+docs/ux/product-context.md
+docs/product-redesign/registry.md
+```
+
+Después abre solamente los flujos relacionados en `docs/ux/flows/`. Los briefs, handoffs, reviews, capturas y notas de implementación se cargan cuando son relevantes.
+
+El código se inspecciona para comprobar qué hace realmente el prototipo o cuando el usuario pide una implementación.
+
+En sus respuestas y documentos distingue:
+
+- comportamiento documentado;
+- comportamiento observado en el prototipo;
+- inferencias;
+- preguntas abiertas.
+
+Si dos fuentes se contradicen, informa la diferencia. No modifica la documentación canónica para copiar el comportamiento del prototipo sin una decisión del usuario.
+
+### Qué actualiza al documentar un flujo
+
+Una decisión de producto debe quedar sincronizada en:
+
+```txt
+docs/ux/product-context.md
+docs/ux/flows/<flow-id>.md
+docs/product-redesign/registry.md
+```
+
+Los artefactos propios de una vista se guardan planos bajo `docs/ux/`:
+
+```txt
+docs/ux/<view-name>-ux-brief.md
+docs/ux/<view-name>-ui-handoff.md
+docs/ux/<view-name>-ui-review.md
+docs/ux/<view-name>-implementation-notes.md
+```
+
+Solo los documentos de flujo se guardan en `docs/ux/flows/`.
+
+## Cómo convive con las skills especialistas
+
+El Asistente de Producto no reemplaza a `planner`, `builder` ni `reviewer`. Es la puerta de entrada que decide qué parte del proceso necesita el usuario.
+
+Cuando el pedido es solo consultar, idear o documentar, la cadena de implementación no se ejecuta.
+
+Cuando el usuario pide llevar una mejora al prototipo, el recorrido es:
+
+```txt
+Asistente de Producto
+        ↓
+     planner
+        ↓
+     builder
+        ↓
+     reviewer
+        ↓
+     builder correctivo, solo si hay problemas Critical o High
+```
+
+- `planner` transforma la decisión de producto en un brief UX y un handoff construible.
+- `builder` implementa React desde ese contrato.
+- `reviewer` compara el resultado contra el producto, el flujo, el handoff y el sistema visual.
+- `builder` vuelve a intervenir únicamente cuando la revisión requiere correcciones importantes.
+
+No son procesos separados ni agentes independientes. Codex coordina las instrucciones de cada skill dentro de la misma tarea.
+
+Los usuarios expertos pueden entrar directamente a cualquier etapa mediante `/planner`, `/builder` o `/reviewer`.
+
+## Uso directo de las skills especialistas
+
+### Planner
+
+Usá `/planner` cuando ya sabés qué pantalla o flujo querés diseñar y necesitás producir el contrato UX.
+
+```txt
+/planner Modernizá la facturación de mostrador usando estas capturas legacy
+```
+
+`planner` lee el contexto existente, pregunta solo por decisiones bloqueantes y genera:
+
+```txt
+docs/ux/<view-name>-ux-brief.md
+docs/ux/<view-name>-ui-handoff.md
+```
+
+No implementa código.
+
+### Builder
+
+Usá `/builder` cuando ya existe un handoff aprobado y querés construir o corregir una vista React.
+
+```txt
+/builder docs/ux/<view-name>-ui-handoff.md -> skill-flow-test/next-sandbox/src/features/<view-name>/
+```
+
+Si recibe un review, lo trata como contrato de corrección. Deja sus decisiones y verificaciones en `docs/ux/<view-name>-implementation-notes.md`.
+
+`builder` sigue disponible como skill independiente. El Asistente de Producto no absorbe ni duplica su responsabilidad.
+
+### Reviewer
+
+Usá `/reviewer` cuando ya existe una UI para comparar contra el producto, el flujo, el handoff, las capturas y el feedback disponible.
+
+```txt
+/reviewer http://localhost:3000/<view-name> + docs/ux/<view-name>-ui-handoff.md
+```
+
+`reviewer` no edita código. Produce `docs/ux/<view-name>-ui-review.md` para que `builder` aplique las correcciones necesarias.
+
+## Instalación
+
+### Codex
+
+Desde la raíz del repositorio:
 
 ```bash
 ./scripts/install-local-plugin.sh
 ```
 
-Ese script:
+El script registra el marketplace local, instala `90thskills` y habilita los comandos del plugin.
 
-- crea o actualiza un marketplace local para Codex;
-- registra el plugin;
-- instala `90thskills`;
-- habilita `/producto` como entrada recomendada y conserva `/product-modernizer`, `/planner`, `/builder` y `/reviewer` para uso experto.
+Después de instalar, reiniciá Codex o abrí una tarea nueva para actualizar la lista de skills y comandos.
 
-Despues de instalar, reinicia Codex o abre un thread nuevo para que aparezcan los comandos.
+### Claude Code
 
-### Si usas Claude Code
-
-El script anterior es solo para Codex. Claude Code puede usar las mismas skills, pero espera otra ubicacion:
-
-```txt
-.claude/skills/<skill-name>/SKILL.md
-```
-
-Para instalarlas dentro del proyecto clonado:
+Claude Code puede usar las mismas skills, pero espera encontrarlas bajo `.claude/skills/`:
 
 ```bash
 mkdir -p .claude/skills
@@ -49,34 +187,13 @@ cp -R skills/builder .claude/skills/builder
 cp -R skills/reviewer .claude/skills/reviewer
 ```
 
-Despues, en Claude Code deberian poder invocarse como:
+Allí se invocan mediante `/product-modernizer`, `/planner`, `/builder` y `/reviewer`. El alias `/producto` pertenece al plugin de Codex.
 
-```txt
-/product-modernizer
-/planner
-/builder
-/reviewer
-```
+Para disponer de las skills en todos los proyectos de Claude Code, copialas a `~/.claude/skills/` y reiniciá la aplicación.
 
-Si queres tenerlas disponibles para todos tus proyectos en Claude Code, copialas a:
+## Playground del prototipo
 
-```txt
-~/.claude/skills/
-```
-
-Notas:
-
-- `.codex-plugin/` y `commands/` son parte de la instalacion como plugin de Codex.
-- Claude Code descubre skills desde `.claude/skills/` o `~/.claude/skills/`.
-- Si no aparecen despues de copiarlas, reinicia Claude Code.
-
-## Preparar el playground Next
-
-El sandbox esta en:
-
-```txt
-skill-flow-test/next-sandbox/
-```
+El prototipo está en `skill-flow-test/next-sandbox/` e incluye el shell, el selector de vistas y los workspaces actuales de InfoManager.
 
 Para levantarlo:
 
@@ -86,200 +203,26 @@ npm install
 npm run dev
 ```
 
-Abrir:
+Abrí [http://localhost:3000](http://localhost:3000).
 
-```txt
-http://localhost:3000
-```
+Las nuevas features deben vivir en `src/features/<view-name>/`. Las rutas de prueba pertenecen a `src/app/<view-name>/page.tsx` cuando necesitan una URL propia.
 
-Este proyecto esta pensado como destino de prueba para `builder`. No tiene pantallas de negocio cargadas; las vistas generadas deberian ir en:
-
-```txt
-skill-flow-test/next-sandbox/src/features/<view-name>/
-```
-
-Y las rutas de prueba en:
-
-```txt
-skill-flow-test/next-sandbox/src/app/<view-name>/page.tsx
-```
-
-## Donde se guardan los documentos UX
-
-El contexto de producto vive en:
-
-```txt
-docs/ux/product-context.md
-docs/ux/flows/<flow-id>.md
-```
-
-`product-context.md` es el harness global del producto. Los archivos en `docs/ux/flows/` profundizan flujos grandes o criticos.
-
-Las skills guardan los artefactos de vista planos en:
-
-```txt
-docs/ux/
-```
-
-Con este formato:
-
-```txt
-docs/ux/<view-name>-ux-brief.md
-docs/ux/<view-name>-ui-handoff.md
-docs/ux/<view-name>-ui-review.md
-docs/ux/<view-name>-implementation-notes.md
-```
-
-No se crea una carpeta por vista.
-
-## Flujo recomendado
-
-### 1. Crear o mantener el contexto de producto
-
-Antes de modernizar muchas pantallas, conviene dejar un harness de producto:
-
-```txt
-docs/ux/product-context.md
-```
-
-Ese archivo concentra:
-
-- tipos de usuario y permisos;
-- entidades principales;
-- journeys y flujos existentes;
-- problemas actuales del producto;
-- reglas globales de UX;
-- patrones reutilizables;
-- decisiones ya tomadas;
-- preguntas abiertas.
-
-Para flujos grandes, agregar:
-
-```txt
-docs/ux/flows/<flow-id>.md
-```
-
-El contexto global evita que cada pantalla vuelva a entrevistar roles, entidades, permisos, lenguaje y reglas transversales.
-
-### 2. Hablar con el Asistente de Producto
-
-El Asistente de Producto es la entrada recomendada para entender el producto, pensar mejoras, mantener la documentacion o reconstruir un flujo. No hace falta elegir un modo ni aprender una sintaxis especial.
-
-Ejemplos:
-
-```txt
-/producto ¿Como funcionan hoy los cobros?
-/producto Tengo una idea para permitir pagos parciales
-/producto Deja documentada la alternativa que elegimos
-/producto Lleva esta mejora al prototipo en skill-flow-test/next-sandbox
-```
-
-El asistente interpreta la intencion a partir de la conversacion:
-
-- las preguntas y las ideas son de solo lectura;
-- solamente modifica documentacion cuando se lo pedis de forma explicita;
-- cuando le pedis llevar algo al prototipo, documenta primero y coordina `planner`, `builder` y `reviewer`;
-- si la revision encuentra problemas Critical o High, vuelve a usar `builder` con el plan de correcciones.
-
-El comando `/product-modernizer` sigue disponible como alias experto compatible.
-
-### 3. Usar `planner` manualmente
-
-`planner` es la skill de UX. Sirve para entender una pantalla legacy, replantear su experiencia dentro del producto y dejar un contrato claro para construirla.
-
-Si existe `docs/ux/product-context.md`, `planner` debe leerlo antes de entrevistar y no debe preguntar datos ya resueltos por el contexto de producto.
-
-Lo ideal es pasarle una captura de la pantalla que queres modernizar. Si el flujo tiene mas de una vista, modal, popup, confirmacion, estado de error, drawer o paso secundario, conviene pasarle todas esas capturas juntas.
-
-Tambien ayuda explicar:
-
-- que hace la pantalla;
-- quien la usa;
-- que acciones son frecuentes;
-- que datos no se pueden perder;
-- que cosas del legacy son obligatorias y cuales son friccion historica;
-- que pasa antes y despues de ese flujo.
-
-Ejemplo:
-
-```txt
-/planner Quiero modernizar la pantalla de facturacion mostrador. Te paso capturas de la pantalla principal, el buscador de articulos y el modal de pago.
-```
-
-`planner` no deberia construir codigo. Primero hace preguntas de producto/UX, de a una por vez. Hay que responderlas con el mayor contexto posible. Cuando haya suficiente informacion, genera:
-
-```txt
-docs/ux/<view-name>-ux-brief.md
-docs/ux/<view-name>-ui-handoff.md
-```
-
-El archivo importante para construir es el `ui-handoff`.
-
-### 4. Usar `builder`
-
-`builder` toma el handoff generado por `planner` y lo convierte en una vista React/Next usando las convenciones del proyecto destino.
-
-Si el handoff referencia `docs/ux/product-context.md` o `docs/ux/flows/<flow-id>.md`, `builder` debe leerlos y respetar lenguaje, roles, permisos, patrones reutilizables y dependencias del flujo.
-
-Para probar en el sandbox:
-
-```txt
-/builder docs/ux/<view-name>-ui-handoff.md -> skill-flow-test/next-sandbox/src/features/<view-name>/
-```
-
-Pedile tambien que agregue la ruta:
-
-```txt
-skill-flow-test/next-sandbox/src/app/<view-name>/page.tsx
-```
-
-`builder` debe dejar notas en:
-
-```txt
-docs/ux/<view-name>-implementation-notes.md
-```
-
-Despues de construir, corre:
+Después de construir o corregir una vista, verificá el proyecto:
 
 ```bash
-cd skill-flow-test/next-sandbox
 npm run lint
 npm run build
 ```
 
-### 5. Usar `reviewer`
-
-`reviewer` revisa la UI generada contra:
-
-- el contexto de producto;
-- el flow file, si existe;
-- el handoff;
-- el brief UX, si existe;
-- las capturas legacy;
-- la captura o URL de la UI nueva;
-- feedback del usuario.
-
-No edita codigo. Escribe un plan de correcciones para que despues lo ejecute `builder`.
-
-Ejemplo:
+Antes de usar `builder` en un producto real, revisá:
 
 ```txt
-/reviewer http://localhost:3000/<view-name> + docs/ux/<view-name>-ui-handoff.md
+skills/builder/references/design.md
+skills/builder/references/component-library.md
+skills/builder/references/product-domain.md
 ```
 
-El resultado esperado:
-
-```txt
-docs/ux/<view-name>-ui-review.md
-```
-
-Si hay que corregir la implementacion:
-
-```txt
-/builder docs/ux/<view-name>-ui-handoff.md + docs/ux/<view-name>-ui-review.md -> skill-flow-test/next-sandbox/src/features/<view-name>/
-```
-
-## Estructura del repo
+## Estructura del repositorio
 
 ```txt
 .codex-plugin/
@@ -291,6 +234,12 @@ commands/
   planner.md
   builder.md
   reviewer.md
+
+docs/
+  product-redesign/
+  ux/
+    product-context.md
+    flows/
 
 skills/
   product-modernizer/
@@ -306,34 +255,14 @@ scripts/
   install-local-plugin.sh
 ```
 
-## Configuracion del builder
+## Referencia de comandos
 
-Antes de usar `builder` en un proyecto real, conviene revisar:
+| Comando | Uso recomendado |
+| --- | --- |
+| `/producto` | Conversar, consultar, idear, documentar o modernizar un flujo. |
+| `/product-modernizer` | Alias experto y compatible del Asistente de Producto. |
+| `/planner` | Crear o actualizar un brief UX y un handoff. |
+| `/builder` | Implementar un handoff o aplicar un review. |
+| `/reviewer` | Revisar una UI y producir un plan de correcciones. |
 
-```txt
-skills/builder/references/design.md
-skills/builder/references/component-library.md
-skills/builder/references/product-domain.md
-```
-
-Esos archivos describen el sistema visual, componentes disponibles y lenguaje de negocio que `builder` debe respetar.
-
-Assets de referencia pueden ir en:
-
-```txt
-skills/builder/assets/
-```
-
-## Comandos disponibles
-
-Cuando el plugin esta instalado:
-
-```txt
-/producto
-/product-modernizer
-/planner
-/builder
-/reviewer
-```
-
-Si los slash commands no aparecen despues de instalar, reinicia Codex y abre un thread nuevo. Tambien podes elegir **Asistente de Producto** desde el selector o invocar las skills escribiendo `$product-modernizer`, `$planner`, `$builder` o `$reviewer`.
+También podés elegir **Asistente de Producto** desde el selector o invocar `$product-modernizer`, `$planner`, `$builder` y `$reviewer` si la interfaz muestra skills pero no comandos.
